@@ -6,7 +6,7 @@
 #    By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 11:18:23 by fdel-car          #+#    #+#              #
-#    Updated: 2016/02/25 17:37:02 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/02/29 17:44:24 by fdel-car         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,7 +24,8 @@ SRCS = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	   ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c\
 	   ft_lstdel.c ft_lstadd.c ft_lstaddend.c ft_lstiter.c ft_lstmap.c\
 	   ft_swap.c ft_islower.c ft_isupper.c ft_lstaddn.c ft_swap_string.c\
-	   ft_putstr_lst.c ft_strndup.c ft_strjoin_free.c get_next_line.c
+	   ft_putstr_lst.c ft_strndup.c ft_strjoin_free.c get_next_line.c\
+	   ft_strputtab.c
 
 OBJS = $(SRCS:.c=.o)
 

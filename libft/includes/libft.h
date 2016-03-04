@@ -6,7 +6,7 @@
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 17:26:34 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/02/23 00:30:50 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/02/29 17:45:39 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+void				ft_strputtab(char **tab);
 void				*ft_memalloc(size_t size);
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_putchar(char c);
