@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FdF.h                                              :+:      :+:    :+:   */
+/*   ft_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/25 17:32:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/02/25 18:46:10 by fdel-car         ###   ########.fr       */
+/*   Created: 2016/03/14 18:13:57 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/03/14 21:50:40 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-typedef struct	s_glob
+int		ft_color(t_draw *draw)
 {
-	void		*mlx;
-	void		*win;
-}				t_glob;
-
-#endif
+	if (draw->z1 == 0 && draw->z2 == 0)
+		return (0xFFFFFF);
+	else
+		return (16776960);
+}

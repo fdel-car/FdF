@@ -6,7 +6,7 @@
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 23:27:18 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/14 18:02:39 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:50:47 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	ft_draw_ver(t_data **data, t_glob *glob, t_draw *draw, int i)
 		while (k++ < glob->y_max)
 		{
 			j = 0;
-			draw->x1 = ft_iso(temp->x, temp->y, temp->z, 0);
-			draw->y1 = ft_iso(temp->x, temp->y, temp->z, 1);
+			draw->x1 = ft_iso_x(temp->x, temp->y, glob);
+			draw->y1 = ft_iso_y(temp->x, temp->y, temp->z, glob);
 			draw->z1 = temp->z;
 			while (j++ <= glob->x)
 				temp = temp->next;
-			draw->x2 = ft_iso(temp->x, temp->y, temp->z, 0);
-			draw->y2 = ft_iso(temp->x, temp->y, temp->z, 1);
+			draw->x2 = ft_iso_x(temp->x, temp->y, glob);
+			draw->y2 = ft_iso_y(temp->x, temp->y, temp->z, glob);
 			draw->z2 = temp->z;
-			ft_draw_line(draw, glob, 0xFFFFFF);
+			ft_draw_line(draw, glob, ft_color(draw));
 		}
 		temp2 = temp2->next;
 	}
@@ -53,13 +53,14 @@ void	ft_draw_hor(t_data **data, t_glob *glob, t_draw *draw)
 	temp = *data;
 	while (temp->next)
 	{
-		draw->x1 = ft_iso(temp->x, temp->y, temp->z, 0);
-		draw->y1 = ft_iso(temp->x, temp->y, temp->z, 1);
+		draw->x1 = ft_iso_x(temp->x, temp->y, glob);
+		draw->y1 = ft_iso_y(temp->x, temp->y, temp->z, glob);
+		draw->z1 = temp->z;
+		draw->x2 = ft_iso_x((temp->next)->x, (temp->next)->y, glob);
+		draw->y2 = ft_iso_y((temp->next)->x,
+		(temp->next)->y, (temp->next)->z, glob);
 		draw->z2 = (temp->next)->z;
-		draw->x2 = ft_iso((temp->next)->x, (temp->next)->y, (temp->next)->z, 0);
-		draw->y2 = ft_iso((temp->next)->x, (temp->next)->y, (temp->next)->z, 1);
-		draw->z2 = (temp->next)->z;
-		ft_draw_line(draw, glob, 0xFFFFFF);
+		ft_draw_line(draw, glob, ft_color(draw));
 		temp = temp->next;
 		if (i == glob->x && temp->next)
 		{
@@ -110,9 +111,18 @@ int		main(int ac, char **av)
 	draw = (t_draw*)malloc(sizeof(t_draw));
 	glob.mlx = mlx_init();
 	glob.win = mlx_new_window(glob.mlx, WIDTH, HEIGHT, "fdf");
+	glob.inc = 0;
+	glob.zoom = 16;
+	glob.move_x = 0;
+	glob.move_y = 0;
 	if (ac == 2)
+	{
 		if (!ft_fdf(draw, &glob, NULL, av[1]))
+		{
+			ft_putendl("Invalid map");
 			return (0);
-	mlx_key_hook(glob.win, ft_key, &glob);
+		}
+	}
+	mlx_hook(glob.win, 2, 1, ft_key, &glob);
 	mlx_loop(glob.mlx);
 }

@@ -6,15 +6,15 @@
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 15:46:07 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/14 18:07:39 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:52:39 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
-#include <fcntl.h>
 #include <stdlib.h>
 #include "fdf.h"
+#include <unistd.h>
 
 void	ft_addend(t_data **data, t_data *new)
 {
@@ -26,7 +26,7 @@ void	ft_addend(t_data **data, t_data *new)
 	temp->next = new;
 }
 
-int		ft_set_data(char **tab, int y, t_data *data, int i)
+int		ft_set_data(char **tab, t_glob *glob, t_data *data, int i)
 {
 	t_data		*new;
 	static int	x;
@@ -35,8 +35,10 @@ int		ft_set_data(char **tab, int y, t_data *data, int i)
 	{
 		new = (t_data *)malloc(sizeof(t_data));
 		new->x = i;
-		new->y = y;
+		new->y = glob->y;
 		new->z = ft_atoi(tab[i]);
+		if (new->z != 0)
+			new->z += glob->inc;
 		new->next = NULL;
 		ft_addend(&data, new);
 		i++;
@@ -44,48 +46,48 @@ int		ft_set_data(char **tab, int y, t_data *data, int i)
 	if (x == 0)
 		x = i;
 	if (x != i)
-	{
-		ft_putendl("Invalid map, there must be the same numbers of coordinates on each line");
 		return (1);
-	}
 	return (0);
 }
 
-t_data	*ft_createdata(char **tab, int y)
+t_data	*ft_createdata(char **tab, t_glob *glob)
 {
 	t_data *data;
 
 	data = (t_data *)malloc(sizeof(t_data));
 	data->x = 0;
-	data->y = y;
+	data->y = glob->y;
 	data->z = ft_atoi(tab[0]);
+	if (data->z != 0)
+		data->z += glob->inc;
 	data->next = NULL;
 	return (data);
 }
 
-t_data	*ft_init(char *str)
+t_data	*ft_init(t_glob *glob)
 {
-	t_glob	glob;
 	t_data	*data;
 	char	*line;
 	char	**tab;
 
-	glob.y = 0;
-	glob.fd = open(str, O_RDONLY);
-	while ((get_next_line(glob.fd, &line)) == 1)
+	while ((glob->i = (get_next_line(glob->fd, &line))) == 1)
 	{
 		tab = ft_strsplit(line, ' ');
-		if (glob.y == 0)
+		if (glob->y == 0)
 		{
-			data = ft_createdata(tab, glob.y);
-			if (ft_set_data(tab, glob.y, data, 1) == 1)
+			data = ft_createdata(tab, glob);
+			if (ft_set_data(tab, glob, data, 1) == 1)
 				return (NULL);
 		}
 		else
-			if (ft_set_data(tab, glob.y, data, 0) == 1)
+		{
+			if (ft_set_data(tab, glob, data, 0) == 1)
 				return (NULL);
+		}
 		free(tab);
-		glob.y++;
+		glob->y++;
 	}
+	if (glob->i < 0)
+		return (NULL);
 	return (data);
 }

@@ -6,13 +6,13 @@
 #    By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/25 16:12:54 by fdel-car          #+#    #+#              #
-#    Updated: 2016/03/14 17:40:39 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/03/14 18:27:49 by fdel-car         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRCS = ft_init.c main.c ft_draw.c ft_iso.c ft_shortcut.c fdf.c
+SRCS = ft_init.c main.c ft_draw.c ft_iso.c ft_shortcut.c fdf.c ft_color.c
 
 OBJS = $(SRCS:.c=.o)
 
