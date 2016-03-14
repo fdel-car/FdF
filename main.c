@@ -6,7 +6,7 @@
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 23:27:18 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/05 00:09:49 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/03/14 18:02:39 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,35 @@
 #include "mlx.h"
 #include "libft/includes/libft.h"
 #include <stdlib.h>
+
+void	ft_draw_ver(t_data **data, t_glob *glob, t_draw *draw, int i)
+{
+	t_data	*temp;
+	t_data	*temp2;
+	int		j;
+	int		k;
+
+	temp2 = *data;
+	while (i++ <= glob->x)
+	{
+		temp = temp2;
+		k = 0;
+		while (k++ < glob->y_max)
+		{
+			j = 0;
+			draw->x1 = ft_iso(temp->x, temp->y, temp->z, 0);
+			draw->y1 = ft_iso(temp->x, temp->y, temp->z, 1);
+			draw->z1 = temp->z;
+			while (j++ <= glob->x)
+				temp = temp->next;
+			draw->x2 = ft_iso(temp->x, temp->y, temp->z, 0);
+			draw->y2 = ft_iso(temp->x, temp->y, temp->z, 1);
+			draw->z2 = temp->z;
+			ft_draw_line(draw, glob, 0xFFFFFF);
+		}
+		temp2 = temp2->next;
+	}
+}
 
 void	ft_draw_hor(t_data **data, t_glob *glob, t_draw *draw)
 {
@@ -24,11 +53,11 @@ void	ft_draw_hor(t_data **data, t_glob *glob, t_draw *draw)
 	temp = *data;
 	while (temp->next)
 	{
-		draw->x1 = ft_iso(temp->x, temp->y, 0);
-		draw->y1 = ft_iso(temp->x, temp->y, 1);
-		draw->z1 = temp->z;
-		draw->x2 = ft_iso((temp->next)->x, (temp->next)->y, 0);
-		draw->y2 = ft_iso((temp->next)->x, (temp->next)->y, 1);
+		draw->x1 = ft_iso(temp->x, temp->y, temp->z, 0);
+		draw->y1 = ft_iso(temp->x, temp->y, temp->z, 1);
+		draw->z2 = (temp->next)->z;
+		draw->x2 = ft_iso((temp->next)->x, (temp->next)->y, (temp->next)->z, 0);
+		draw->y2 = ft_iso((temp->next)->x, (temp->next)->y, (temp->next)->z, 1);
 		draw->z2 = (temp->next)->z;
 		ft_draw_line(draw, glob, 0xFFFFFF);
 		temp = temp->next;
@@ -39,6 +68,22 @@ void	ft_draw_hor(t_data **data, t_glob *glob, t_draw *draw)
 		}
 		i++;
 	}
+}
+
+int		ft_max_y(t_data **data)
+{
+	t_data	*temp;
+	int		y;
+
+	y = 0;
+	temp = *data;
+	while (temp)
+	{
+		if (temp->y > y)
+			y = temp->y;
+		temp = temp->next;
+	}
+	return (y);
 }
 
 int		ft_max_x(t_data **data)
@@ -59,7 +104,6 @@ int		ft_max_x(t_data **data)
 
 int		main(int ac, char **av)
 {
-	t_data	*data;
 	t_draw	*draw;
 	t_glob	glob;
 
@@ -67,11 +111,8 @@ int		main(int ac, char **av)
 	glob.mlx = mlx_init();
 	glob.win = mlx_new_window(glob.mlx, WIDTH, HEIGHT, "fdf");
 	if (ac == 2)
-	{
-		data = ft_init(av[1]);
-		glob.x = ft_max_x(&data);
-		ft_draw_hor(&data, &glob, draw);
-	}
+		if (!ft_fdf(draw, &glob, NULL, av[1]))
+			return (0);
+	mlx_key_hook(glob.win, ft_key, &glob);
 	mlx_loop(glob.mlx);
-	return (0);
 }

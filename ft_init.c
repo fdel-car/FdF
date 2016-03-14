@@ -6,7 +6,7 @@
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 15:46:07 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/03 17:33:29 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/03/14 18:07:39 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	ft_addend(t_data **data, t_data *new)
 	temp->next = new;
 }
 
-void	ft_set_data(char **tab, int y, t_data *data, int i)
+int		ft_set_data(char **tab, int y, t_data *data, int i)
 {
-	t_data	*new;
+	t_data		*new;
+	static int	x;
 
 	while (tab[i])
 	{
@@ -40,6 +41,14 @@ void	ft_set_data(char **tab, int y, t_data *data, int i)
 		ft_addend(&data, new);
 		i++;
 	}
+	if (x == 0)
+		x = i;
+	if (x != i)
+	{
+		ft_putendl("Invalid map, there must be the same numbers of coordinates on each line");
+		return (1);
+	}
+	return (0);
 }
 
 t_data	*ft_createdata(char **tab, int y)
@@ -69,10 +78,12 @@ t_data	*ft_init(char *str)
 		if (glob.y == 0)
 		{
 			data = ft_createdata(tab, glob.y);
-			ft_set_data(tab, glob.y, data, 1);
+			if (ft_set_data(tab, glob.y, data, 1) == 1)
+				return (NULL);
 		}
 		else
-			ft_set_data(tab, glob.y, data, 0);
+			if (ft_set_data(tab, glob.y, data, 0) == 1)
+				return (NULL);
 		free(tab);
 		glob.y++;
 	}

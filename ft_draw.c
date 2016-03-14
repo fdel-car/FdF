@@ -6,7 +6,7 @@
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 16:29:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/04 19:02:14 by fdel-car         ###   ########.fr       */
+/*   Updated: 2016/03/13 20:51:24 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@ int		ft_abs(int a)
 	return (a);
 }
 
-void	ft_draw_line(t_draw *draw, t_glob *glob, unsigned int color)
+void	ft_draw_line(t_draw *dr, t_glob *glob, unsigned int color)
 {
-	draw->dx = ft_abs(draw->x2 - draw->x1);
-	draw->dy = ft_abs(draw->y2 - draw->y1);
-	draw->sx = draw->x1 < draw->x2 ? 1 : -1;
-	draw->sy = draw->y1 < draw->y2 ? 1 : -1;
-	draw->err = (draw->dx < draw->dy ? draw->dx : -draw->dy) / 2;
+	dr->dx = ft_abs(dr->x2 - dr->x1);
+	dr->dy = ft_abs(dr->y2 - dr->y1);
+	dr->sx = dr->x1 < dr->x2 ? 1 : -1;
+	dr->sy = dr->y1 < dr->y2 ? 1 : -1;
+	dr->err = (dr->dx < dr->dy ? dr->dx : -dr->dy) / 2;
+	mlx_pixel_put(glob->mlx, glob->win, dr->x1, dr->y1 + 1, color);
 	while (1)
 	{
-		mlx_pixel_put(glob->mlx, glob->win, draw->x1, draw->y1, color);
-		if ((draw->sx == 1 && draw->x1 > draw->x2) ||
-			(draw->sx == -1 && draw->x1 < draw->x2) ||
-			(draw->x1 == draw->x2 && draw->y1 == draw->y2))
+		if ((dr->sx == 1 && dr->x1 > dr->x2) || (dr->sx == -1 &&
+			dr->x1 < dr->x2) || (dr->x1 == dr->x2 && dr->y1 == dr->y2))
 			break ;
-		draw->e2 = draw->err;
-		if (draw->e2 > -draw->dx)
+		dr->e2 = dr->err;
+		if (dr->e2 > -dr->dx)
 		{
-			draw->err -= draw->dy;
-			draw->x1 += draw->sx;
+			dr->err -= dr->dy;
+			dr->x1 += dr->sx;
 		}
-		if (draw->e2 < draw->dy)
+		if (dr->e2 < dr->dy)
 		{
-			draw->err += draw->dx;
-			draw->y1 += draw->sy;
+			dr->err += dr->dx;
+			dr->y1 += dr->sy;
 		}
+		mlx_pixel_put(glob->mlx, glob->win, dr->x1, dr->y1, color);
 	}
 }

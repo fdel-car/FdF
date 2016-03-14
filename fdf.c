@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iso.c                                           :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 23:42:15 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/13 20:23:21 by fdel-car         ###   ########.fr       */
+/*   Created: 2016/03/14 17:26:50 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/03/14 18:03:03 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		ft_iso(int x, int y, int z, int which)
+int		ft_fdf(t_draw *draw, t_glob *glob, t_data *data, char *str)
 {
-	if (which == 0)
-		return ((x - y) * 32 + WIDTH / 2);
-	else
-		return (((x + y) * 16 + HEIGHT / 4) - z);
+	data = ft_init(str);
+	if (!data)
+		return (0);
+	glob->x = ft_max_x(&data);
+	glob->y_max = ft_max_y(&data);
+	ft_draw_hor(&data, glob, draw);
+	ft_draw_ver(&data, glob, draw, 0);
+	glob->data = data;
+	glob->draw = draw;
+	glob->str = str;
+	return (1);
 }

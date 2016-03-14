@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iso.c                                           :+:      :+:    :+:   */
+/*   ft_shortcut.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 23:42:15 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/13 20:23:21 by fdel-car         ###   ########.fr       */
+/*   Created: 2016/03/14 17:27:11 by fdel-car          #+#    #+#             */
+/*   Updated: 2016/03/14 17:44:03 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx.h"
+#include <stdlib.h>
 #include "fdf.h"
 
-int		ft_iso(int x, int y, int z, int which)
+int		ft_key(int keycode, t_glob *glob)
 {
-	if (which == 0)
-		return ((x - y) * 32 + WIDTH / 2);
-	else
-		return (((x + y) * 16 + HEIGHT / 4) - z);
+	if (keycode == 53)
+		exit(0);
+	if (keycode == 71)
+	{
+		mlx_clear_window(glob->mlx, glob->win);
+		ft_fdf(glob->draw, glob, glob->data, glob->str);
+	}
+	return(0);
 }
