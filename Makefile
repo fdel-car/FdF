@@ -6,32 +6,37 @@
 #    By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/25 16:12:54 by fdel-car          #+#    #+#              #
-#    Updated: 2016/03/14 18:27:49 by fdel-car         ###   ########.fr        #
+#    Updated: 2016/03/21 17:38:24 by fdel-car         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRCS = ft_init.c main.c ft_draw.c ft_iso.c ft_shortcut.c fdf.c ft_color.c
+SRCS = src/fdf.c src/ft_color.c src/ft_draw.c src/ft_init.c src/ft_iso.c \
+		src/ft_shortcut.c src/main.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = fdf.o ft_color.o ft_draw.o ft_init.o ft_iso.o ft_shortcut.o main.o
 
 CFLAGS = -Wall -Wextra -Werror
+
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	cd libft && make re && cd ..
-	gcc $(CFLAGS) -o $@ $^ ./libft/libft.a $(MLXFLAGS)
+	@make re -C libft
+	@gcc  -I./includes $(MLXFLAGS) -o $@ $^ ./libft/libft.a
+	@echo "\033[1;31m$(NAME) compiled successfully"
+	@echo "\033[1A\033[0;39m"
 
-%.o: %.c
-	gcc $(CFLAGS) -c $^ -I./libft/includes
+$(OBJS): $(SRCS)
+	@clang $(CFLAGS) -c $^ -I./libft/includes -I./includes
 
 clean:
-	rm -rf $(OBJS)
+	@make clean -C libft
+	@rm -rf $(OBJS)
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean
 	make all
