@@ -1,4 +1,4 @@
-# Fdf
+# FdF
 
 Premier projet de la branche infographie de 42, il s'agit de faire une représentation en relief (fil de fer) d'une map donnée.
 
