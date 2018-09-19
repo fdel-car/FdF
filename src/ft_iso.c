@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iso.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 23:42:15 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/17 14:58:44 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:34:26 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
-#include <stdlib.h>
 
 void	ft_putstring(t_glob *gl)
 {

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 15:46:07 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/16 22:07:42 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:35:35 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
 #include "fdf.h"
-#include <unistd.h>
 
 void	ft_addend(t_data **data, t_data *new)
 {
@@ -35,7 +32,7 @@ int		ft_set_data(char **tab, t_glob *glob, t_data *data, int i)
 		new = (t_data *)malloc(sizeof(t_data));
 		new->x = i;
 		new->y = glob->y;
-		new->z = ft_atoi(tab[i]);
+		new->z = atoi(tab[i]);
 		if (new->z != 0)
 			new->z = new->z * glob->inc;
 		new->next = NULL;
@@ -56,7 +53,7 @@ t_data	*ft_createdata(char **tab, t_glob *glob)
 	data = (t_data *)malloc(sizeof(t_data));
 	data->x = 0;
 	data->y = glob->y;
-	data->z = ft_atoi(tab[0]);
+	data->z = atoi(tab[0]);
 	if (data->z != 0)
 		data->z = data->z * glob->inc;
 	data->next = NULL;

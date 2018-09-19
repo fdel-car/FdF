@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 23:27:18 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/17 15:17:35 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:35:49 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
-#include "libft.h"
-#include <stdlib.h>
 
 void	ft_draw_ver(t_data **data, t_glob *glob, t_draw *draw, int i)
 {
@@ -123,7 +120,7 @@ int		main(int ac, char **av)
 		glob.help = 0;
 		if (!ft_fdf(draw, &glob, NULL, av[1]))
 		{
-			ft_putendl("Invalid map");
+			printf("Invalid map\n");
 			return (0);
 		}
 		mlx_hook(glob.win, 2, 1, ft_key, &glob);

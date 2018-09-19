@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 17:32:11 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/16 22:18:45 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:35:55 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include "mlx.h"
+# include "libft.h"
 
 typedef struct		s_data
 {

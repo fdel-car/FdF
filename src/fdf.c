@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 17:26:50 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/17 14:59:37 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:34:08 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "mlx.h"
-#include "libft.h"
 
 void	ft_free_data(t_data **data)
 {

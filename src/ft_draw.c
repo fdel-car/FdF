@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdel-car <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdel-car <fdel-car@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 16:29:41 by fdel-car          #+#    #+#             */
-/*   Updated: 2016/03/17 15:14:02 by fdel-car         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:34:15 by fdel-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
-#include "libft.h"
 
 int		ft_abs(int a)
 {
