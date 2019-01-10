@@ -8,7 +8,7 @@ J'ai fais ce projet très tôt à 42 il comporte donc quelques erreurs que je la
 
 Logo de 42
 
-![alt tag](https://github.com/fdel-car/FdF/blob/master/img/42.png)
+![alt tag](/screenshots/42.png)
 Relief de Mars
 
-![alt tag](https://github.com/fdel-car/FdF/blob/master/img/mars.png)
+![alt tag](/screenshots/mars.png)
